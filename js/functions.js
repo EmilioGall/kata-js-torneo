@@ -56,6 +56,31 @@ function shuffleArray(givenArray) {
 };
 
 /**
+ * Description: function generates a random index between two given values (inclusive).
+ *
+ * @param {number} min - The lower limit (inclusive) for generating the random index.
+ * @param {number} max - The upper limit (inclusive) for generating the random index.
+ * @returns {number} A random integer index between min and max (both inclusive).
+ */
+function getRandomIndex(min, max) {
+
+   // Validate that min is less than or equal to max.
+   if (min > max) {
+
+      return NaN; // Return NaN if the inputs are invalid.
+
+   }
+
+   // Generate a random number between 0 (inclusive) and 1 (exclusive), scale it to the desired range,
+   // and use Math.floor to convert it to an integer within the range of [min, max].
+   const result = Math.floor(Math.random() * (max - min + 1)) + min;
+
+   // Return the generated random index.
+   return result;
+
+};
+
+/**
  * Description: function randomly assign a unique weapon from given array [weapons] to each fighter in given array [fighter] and return a new result array [fightersWithWeapons]
  * @param {array} fighters
  * @param {array} weapons
@@ -74,9 +99,6 @@ function chooseWeapons(fighters, weapons) {
    // Initialize an array to store fighters with weapons
    const fightersWithWeapons = [];
 
-   // Function to get a random integer up to max (exclusive)
-   const getRandomIndex = (max) => Math.floor(Math.random() * max);
-
    // Iterate over each fighter to assign a weapon
    shuffledFighters.forEach((fighter, i) => {
 
@@ -89,10 +111,10 @@ function chooseWeapons(fighters, weapons) {
       if (availableWeapons.length > 0) {
 
          // Pick a random index for the weapon
-         const randomIndex = getRandomIndex(availableWeapons.length);
+         const randomIndex = getRandomIndex(0, availableWeapons.length - 1);
 
          // Get the random weapon 
-         const selectedWeapon = availableWeapons[randomIndex];
+         const selectedWeapon = availableWeapons[randomIndex];;
 
          // Assign the weapon to the fighter
          fighterWithWeapon.weapon = selectedWeapon;
