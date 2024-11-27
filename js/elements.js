@@ -1,3 +1,6 @@
+console.log('///// Elements /////');
+
+// Define constant of fighters array [fighters]
 const fighters = [
    {
       name: 'Freezer',
@@ -49,6 +52,10 @@ const fighters = [
    }
 ];
 
+console.log("fighters", typeof fighters, fighters);
+
+
+// Define constant of weapons array [weapons]
 const weapons = [
    {
       name: "Ventaglio della Musa",
@@ -99,3 +106,11 @@ const weapons = [
       power: 250
    }
 ];
+
+console.log("weapons", typeof weapons, weapons);
+
+
+// Define constant of Fight Button
+const fightButtonElem = document.querySelector(".btn");
+
+console.log("fightButtonElem", typeof fightButtonElem, fightButtonElem);
