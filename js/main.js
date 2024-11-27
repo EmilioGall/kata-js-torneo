@@ -43,7 +43,7 @@ const debouncedTournament = debounce(() => executeBoolkaichiTournament(fighters,
 // Add keypress event listener on [inputPasswordElem]
 fightButtonElem.addEventListener('click', function (e) {
 
-   console.log('Button clicked');
+   // console.log('Button clicked');
 
    // Call debounced version of controls
    debouncedTournament();
