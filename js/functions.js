@@ -100,7 +100,7 @@ function chooseWeapons(fighters, weapons) {
    const fightersWithWeapons = [];
 
    // Iterate over each fighter to assign a weapon
-   shuffledFighters.forEach((fighter, i) => {
+   shuffledFighters.forEach((fighter) => {
 
       // Create a new object to hold the fighter's details
       let fighterWithWeapon = { ...fighter };
@@ -146,5 +146,49 @@ function chooseWeapons(fighters, weapons) {
    console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
 
    return fightersWithWeapons;
+
+};
+
+/**
+ * Description: function multiplies every totalPower value in the given array [fightersWithWeapons] by a random index between 1 and 100.
+ * @param {array} fightersWithWeapons
+ * @returns {array}
+ */
+function training(fightersWithWeapons) {
+
+   console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
+
+   // Use the map method to create a new array
+   let trainedFighters = fightersWithWeapons.map(fighter => {
+
+      // console.log("fighter", typeof fighter, fighter);
+
+      // Pick a random index for the training
+      const randomIndex = getRandomIndex(1, 100);
+
+      // Check if the random index is valid (not NaN)
+      if (isNaN(randomIndex)) {
+
+         throw new Error("Generated random index is invalid.");
+
+      };
+
+      console.log(fighter.name, '(totalPower:', fighter.totalPower, ')',
+         'put', randomIndex, '% of effort in training, increasing its power to:', fighter.totalPower * randomIndex);
+      
+      // Multiply the current value by the random index
+      return {
+         name: fighter.name,
+         power: fighter.power,
+         weapon: fighter.weapon,
+         totalPower: fighter.totalPower,
+         trainedPower: fighter.totalPower * randomIndex,
+     };
+
+   });
+
+   console.log("trainedFighters", typeof trainedFighters, trainedFighters);
+
+   return trainedFighters;
 
 };
