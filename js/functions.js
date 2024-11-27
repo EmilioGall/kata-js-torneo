@@ -150,15 +150,15 @@ function chooseWeapons(fighters, weapons) {
 };
 
 /**
- * Description: function multiplies every totalPower value in the given array [fightersWithWeapons] by a random index between 1 and 100.
- * @param {array} fightersWithWeapons
- * @returns {array}
+ * Description: function multiplies every totalPower value in the given array [fightersWithWeapons] by a random index between 1 and 100, simulating a training effect.
+ * @param {array} fightersWithWeapons - An array of fighters objects
+ * @returns {array} - A new array containing the updated fighters after training
  */
 function training(fightersWithWeapons) {
 
    console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
 
-   // Use the map method to create a new array
+   // Use map method to iterate over each fighter in the input array.
    let trainedFighters = fightersWithWeapons.map(fighter => {
 
       // console.log("fighter", typeof fighter, fighter);
@@ -175,20 +175,53 @@ function training(fightersWithWeapons) {
 
       console.log(fighter.name, '(totalPower:', fighter.totalPower, ')',
          'put', randomIndex, '% of effort in training, increasing its power to:', fighter.totalPower * randomIndex);
-      
-      // Multiply the current value by the random index
-      return {
-         name: fighter.name,
-         power: fighter.power,
-         weapon: fighter.weapon,
-         totalPower: fighter.totalPower,
-         trainedPower: fighter.totalPower * randomIndex,
-     };
+
+
+      // Add a new property trainedPower to fighter.
+      fighter.trainedPower = fighter.totalPower * randomIndex;
+
+      // Return the updated Object [fighter]
+      return fighter;
 
    });
 
    console.log("trainedFighters", typeof trainedFighters, trainedFighters);
 
    return trainedFighters;
+
+};
+
+/**
+ * Description: function delete from given array [trainedFighters] elements which trainedPower is less than 2000 and add robot fighter if qualified fighters number is odd.
+ * @param {array} trainedFighters - An array of fighters objects
+ * @returns {array} - A new array containing the updated fighters after training
+ */
+function qualification(trainedFighters) {
+
+   console.log("trainedFighters", typeof trainedFighters, trainedFighters);
+
+   // Use map method to iterate over each fighter in the input array.
+   let qualifiedFighters = trainedFighters.filter(fighter => {
+
+      // console.log("fighter", typeof fighter, fighter);
+
+      // Return the updated Object [fighter]
+      if (fighter.trainedPower > 2000) {
+
+         console.log(fighter.name, 'reached a trainedPower of ', fighter.trainedPower, 'which is enough to be qualified for combat phase!');
+
+         return fighter;
+
+      } else {
+
+         console.log(fighter.name, 'reached a trainedPower of ', fighter.trainedPower, 'which is not enough to be qualified for combat phase!');
+      }
+
+   });
+
+
+   console.log("qualifiedFighters", typeof qualifiedFighters, qualifiedFighters);
+
+   return qualifiedFighters;
 
 };
