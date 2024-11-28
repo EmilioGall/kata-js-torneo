@@ -91,7 +91,7 @@ function chooseWeapons(fighters, weapons) {
    // Shuffle the fighters array
    const shuffledFighters = shuffleArray(fighters);
 
-   console.log("shuffledFighters", typeof shuffledFighters, shuffledFighters);
+   // console.log("shuffledFighters", typeof shuffledFighters, shuffledFighters);
 
    // Create a copy of the weapons array to avoid modifying the original
    const availableWeapons = [...weapons];
@@ -143,7 +143,7 @@ function chooseWeapons(fighters, weapons) {
 
    });
 
-   console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
+   // console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
 
    return fightersWithWeapons;
 
@@ -156,7 +156,7 @@ function chooseWeapons(fighters, weapons) {
  */
 function training(fightersWithWeapons) {
 
-   console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
+   // console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
 
    // Use map method to iterate over each fighter in the input array.
    let trainedFighters = fightersWithWeapons.map(fighter => {
@@ -185,7 +185,7 @@ function training(fightersWithWeapons) {
 
    });
 
-   console.log("trainedFighters", typeof trainedFighters, trainedFighters);
+   // console.log("trainedFighters", typeof trainedFighters, trainedFighters);
 
    return trainedFighters;
 
@@ -198,7 +198,7 @@ function training(fightersWithWeapons) {
  */
 function qualification(trainedFighters) {
 
-   console.log("trainedFighters", typeof trainedFighters, trainedFighters);
+   // console.log("trainedFighters", typeof trainedFighters, trainedFighters);
 
    // Use map method to iterate over each fighter in the input array.
    let qualifiedFighters = trainedFighters.filter(fighter => {
@@ -219,7 +219,7 @@ function qualification(trainedFighters) {
 
    });
 
-   console.log("qualifiedFighters", typeof qualifiedFighters, qualifiedFighters);
+   // console.log("qualifiedFighters", typeof qualifiedFighters, qualifiedFighters);
 
    return qualifiedFighters;
 
@@ -234,7 +234,7 @@ function combat(qualifiedFighters) {
 
    let winners = [];
 
-   let losers = [];
+   let losers = new Set();
 
    let roundsCount = 1;
 
@@ -274,9 +274,9 @@ function combat(qualifiedFighters) {
 
          roundWinners.push(winner);
 
-         losers.push(loser);
+         losers.add(loser);
 
-         console.log(`Winner: ${winner.name} (final power: ${winner.trainedPower})`);
+         console.log(`- Winner: ${winner.name} (final power: ${winner.trainedPower})`);
 
       };
 
@@ -287,19 +287,64 @@ function combat(qualifiedFighters) {
       // Update qualifiedFighters for the next round
       qualifiedFighters = roundWinners;
 
-      winners += roundWinners;
-
       roundsCount++;
 
+   };
+
+   if (qualifiedFighters.length == 1) {
+
+      winners.push(qualifiedFighters[0]);
+
+      console.log("winners", typeof winners, winners);
+
+      losers = [...losers];
+
+      console.log("losers", typeof losers, losers);
+
+      winners.push(losers[losers.length - 1]);
+
+      console.log("winners", typeof winners, winners);
+
+      console.log(`Round for third position Combat n°: ${losers[losers.length - 2].name} vs ${losers[losers.length - 3].name}`);
+
+      const playoffWinner = losers[losers.length - 2].trainedPower > losers[losers.length - 3].trainedPower ? losers[losers.length - 2] : losers[losers.length - 3];
+
+      console.log(`- Winner: ${playoffWinner.name} (final power: ${playoffWinner.trainedPower})`);
+
+      winners.push(playoffWinner);
+
+      console.log("winners", typeof winners, winners);
+      
    };
 
    console.log("Combat Phase End");
 
    console.log("winners", typeof winners, winners);
 
-   console.log("losers", typeof losers, losers);
-
    return winners;
 
 };
 
+/**
+ * Description: function for determining the top three fighters based on trained power.
+ * @param {array} combatWinners
+ * @returns {array}
+ */
+function awardCeremony(combatWinners) {
+
+   console.log("Award Ceremony Start");
+
+   console.log("combatWinners", typeof combatWinners, combatWinners);
+
+   // Log the winners for the podium
+   console.log("Podium Winners:");
+
+   for (let index = combatWinners.length - 1; index >= 0; index--) {
+
+      console.log(`${index + 1} place: ${combatWinners[index].name} with trained power of ${combatWinners[index].trainedPower}`);
+      
+   };
+
+   console.log("Award Ceremony End");
+
+};
