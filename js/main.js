@@ -13,26 +13,38 @@ function executeBoolkaichiTournament(fighters, weapons) {
 
    let fightersWithWeapons = chooseWeapons(fighters, [...weapons]);
 
+   console.log(' ');
+
    // Phase 2: Training
    console.log('%cPhase 2: Training', styleTitles);
 
    let trainedFighters = training(fightersWithWeapons);
+
+   console.log(' ');
 
    // Phase 3: Qualification
    console.log('%cPhase 3: Qualification', styleTitles);
 
    let qualifiedFighters = qualification(trainedFighters);
 
+   console.log(' ');
+
    // Phase 4: Combat
    console.log('%cPhase 4: Combat', styleTitles);
 
    let combatWinners = combat(qualifiedFighters);
 
+   console.log(' ');
+   
    // Phase 5: Awards
    console.log('%cPhase 5: Awards', styleTitles);
 
    let podiumWinners = awardCeremony(combatWinners);
 
+   console.log(' ');
+   console.log(' ');
+   console.log(' ');
+   
    return podiumWinners;
 
 };
