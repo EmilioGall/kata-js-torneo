@@ -69,7 +69,7 @@ function getRandomIndex(min, max) {
 
       return NaN; // Return NaN if the inputs are invalid.
 
-   }
+   };
 
    // Generate a random number between 0 (inclusive) and 1 (exclusive), scale it to the desired range,
    // and use Math.floor to convert it to an integer within the range of [min, max].
@@ -204,13 +204,13 @@ function qualification(trainedFighters) {
       // Return the updated Object [fighter]
       if (fighter.trainedPower > 2000) {
 
-         console.log(`%c${fighter.name}%c reached a power of %c${fighter.trainedPower}%c which is enough to be qualified for combat phase!`, styleFighters, styleDefault, stylePowers, styleDefault);
+         console.log(`%c${fighter.name}%c reached a power of %c${fighter.trainedPower}%c which %cis enough to be qualified%c for combat phase!`, styleFighters, styleDefault, stylePowers, styleDefault, styleQualified, styleDefault);
 
          return fighter;
 
       } else {
 
-         console.log(`%c${fighter.name}%c reached a power of %c${fighter.trainedPower}%c which is enough to be qualified for combat phase!`, styleFightersDisqualified, styleDefault, stylePowers, styleDefault);
+         console.log(`%c${fighter.name}%c reached a power of %c${fighter.trainedPower}%c which %cis NOT enough to be qualified%c for combat phase!`, styleFightersDisqualified, styleDefault, stylePowers, styleDefault, styleDisqualified, styleDefault);
 
       };
 
@@ -251,6 +251,8 @@ function combat(qualifiedFighters) {
 
       let combatsCounter = 1;
 
+      console.log(`%c${qualifiedFighters.length < 5 ? (qualifiedFighters.length < 3 ? 'Final' : 'Semifinal') : `${roundsCount}° Turn` }`, styleTurns);
+
       // Loop through the fighters in pairs
       for (let i = 0; i < qualifiedFighters.length; i += 2) {
 
@@ -259,7 +261,7 @@ function combat(qualifiedFighters) {
          const fighterTwo = qualifiedFighters[i + 1];
 
 
-         console.log(`%cRound ${roundsCount} Combat n° ${combatsCounter}:`, styleRounds, fighterOne.name, 'vs', fighterTwo.name);
+         console.log(`%cCombat n°${combatsCounter}:%c ${fighterOne.name} %cvs %c${fighterTwo.name}`, styleCombats, styleFighters, styleDefault, styleFighters);
 
          combatsCounter++;
 
@@ -273,7 +275,7 @@ function combat(qualifiedFighters) {
 
          losers.add(loser);
 
-         console.log(`- Winner: ${winner.name} with a final power of:`, winner.trainedPower);
+         console.log(`%c- Winner: %c${winner.name}%c with a final power of: %c${winner.trainedPower}`, styleDefault, styleFighters, styleDefault, stylePowers);
 
       };
 
@@ -292,31 +294,31 @@ function combat(qualifiedFighters) {
 
       winners.push(qualifiedFighters[0]);
 
-      console.log("winners", typeof winners, winners);
+      // console.log("winners", typeof winners, winners);
 
       losers = [...losers];
 
-      console.log("losers", typeof losers, losers);
+      // console.log("losers", typeof losers, losers);
 
       winners.push(losers[losers.length - 1]);
 
-      console.log("winners", typeof winners, winners);
+      // console.log("winners", typeof winners, winners);
 
-      console.log(`%cRound for third position Combat n°: ${losers[losers.length - 2].name} vs ${losers[losers.length - 3].name}`, styleRounds);
+      console.log(`%cRound for third position`, styleTurns);
+
+      console.log(`%cCombat: %c${losers[losers.length - 2].name}%c vs %c${losers[losers.length - 3].name}`, styleCombats, styleFighters, styleDefault, styleFighters);
 
       const playoffWinner = losers[losers.length - 2].trainedPower > losers[losers.length - 3].trainedPower ? losers[losers.length - 2] : losers[losers.length - 3];
 
-      console.log(`- Winner: ${playoffWinner.name} (final power: ${playoffWinner.trainedPower})`);
+      console.log(`%c- Winner: %c${playoffWinner.name}%c with a final power of: %c${playoffWinner.trainedPower}`, styleDefault, styleFighters, styleDefault, stylePowers);
 
       winners.push(playoffWinner);
 
-      console.log("winners", typeof winners, winners);
+      // console.log("winners", typeof winners, winners);
 
    };
 
-   console.log("Combat Phase End");
-
-   console.log("winners", typeof winners, winners);
+   // console.log("winners", typeof winners, winners);
 
    return winners;
 
@@ -329,19 +331,15 @@ function combat(qualifiedFighters) {
  */
 function awardCeremony(combatWinners) {
 
-   console.log("Award Ceremony Start");
-
-   console.log("combatWinners", typeof combatWinners, combatWinners);
+   // console.log("combatWinners", typeof combatWinners, combatWinners);
 
    // Log the winners for the podium
-   console.log("Podium Winners:");
+   console.log(`%cPodium Winners:`, styleTurns);
 
    for (let index = combatWinners.length - 1; index >= 0; index--) {
 
-      console.log(`${index + 1} place: ${combatWinners[index].name} with trained power of ${combatWinners[index].trainedPower}`);
+      console.log(`%c${index + 1}° place: %c${combatWinners[index].name}%c with final power of %c${combatWinners[index].trainedPower}`, styleDefault, styleFighters, styleDefault, stylePowers);
 
    };
-
-   console.log("Award Ceremony End");
 
 };
