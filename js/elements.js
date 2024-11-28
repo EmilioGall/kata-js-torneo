@@ -114,3 +114,26 @@ console.log("weapons", typeof weapons, weapons);
 const fightButtonElem = document.querySelector(".btn");
 
 console.log("fightButtonElem", typeof fightButtonElem, fightButtonElem);
+
+///// Define Styles fo Console Logs
+
+const styleDefault = 'color: white; font-family:sans-serif; font-size: 12px;';
+
+const styleTitles = 'background-color: lightgreen; color: green; font-family:sans-serif; font-size: 20px; font-weight: bold; display: block; width: 100%;';
+
+const styleFighters = 'color: darkgoldenrod; font-style: italic; font-family:sans-serif; font-size: 14px;';
+
+const styleWeapons = 'color: darkorange; font-style: italic; font-family:sans-serif; font-size: 14px;';
+
+const stylePowers = 'color: darkseagreen; font-family:sans-serif; font-size: 12px;';
+
+const styleEfforts = 'color: darkorchid; font-family:sans-serif; font-size: 12px;';
+
+const styleFightersQualified = 'color: darkgreen; font-family:sans-serif; font-size: 14px;';
+
+const styleFightersDisqualified = 'color: darkred; text-decoration: line-through; font-family:sans-serif; font-size: 14px;';
+
+const styleRounds = 'background-color: lightgray; color: darkcyan; font-family:sans-serif; font-size: 16px; font-weight: bold;';
+
+
+
