@@ -219,9 +219,87 @@ function qualification(trainedFighters) {
 
    });
 
-
    console.log("qualifiedFighters", typeof qualifiedFighters, qualifiedFighters);
 
    return qualifiedFighters;
 
 };
+
+/**
+ * Description: function for conducting the combat phase between fighters, returning winners of each match.
+ * @param {array} qualifiedFighters
+ * @returns {array}
+ */
+function combat(qualifiedFighters) {
+
+   let winners = [];
+
+   let losers = [];
+
+   let roundsCount = 1;
+
+   while (qualifiedFighters.length > 1) {
+
+      // Ensure that the number of qualified fighters is even
+      if (qualifiedFighters.length % 2 !== 0) {
+
+         // Add a robot fighter if the number is odd
+         qualifiedFighters.push({ name: "Robot", trainedPower: 4000 });
+
+         console.log("Added Robot fighter for balance.");
+
+      };
+
+      let roundWinners = [];
+
+      let combatsCounter = 1;
+
+      // Loop through the fighters in pairs
+      for (let i = 0; i < qualifiedFighters.length; i += 2) {
+
+         const fighterOne = qualifiedFighters[i];
+
+         const fighterTwo = qualifiedFighters[i + 1];
+
+
+         console.log(`Round ${roundsCount} Combat n° ${combatsCounter}: ${fighterOne.name} vs ${fighterTwo.name}`);
+
+         combatsCounter++;
+
+         // Determine the winner based on total power
+         const winner = fighterOne.trainedPower > fighterTwo.trainedPower ? fighterOne : fighterTwo;
+
+         // Determine the loser based on total power
+         const loser = fighterOne.trainedPower < fighterTwo.trainedPower ? fighterOne : fighterTwo;
+
+         roundWinners.push(winner);
+
+         losers.push(loser);
+
+         console.log(`Winner: ${winner.name} (final power: ${winner.trainedPower})`);
+
+      };
+
+      console.log("roundWinners", typeof roundWinners, roundWinners);
+
+      console.log("losers", typeof losers, losers);
+
+      // Update qualifiedFighters for the next round
+      qualifiedFighters = roundWinners;
+
+      winners += roundWinners;
+
+      roundsCount++;
+
+   };
+
+   console.log("Combat Phase End");
+
+   console.log("winners", typeof winners, winners);
+
+   console.log("losers", typeof losers, losers);
+
+   return winners;
+
+};
+
