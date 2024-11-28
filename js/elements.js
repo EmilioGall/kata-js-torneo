@@ -119,21 +119,23 @@ console.log("fightButtonElem", typeof fightButtonElem, fightButtonElem);
 
 const styleDefault = 'color: white; font-family:sans-serif; font-size: 12px;';
 
-const styleTitles = 'background-color: lightgreen; color: green; font-family:sans-serif; font-size: 20px; font-weight: bold; display: block; width: 100%;';
+const styleTitles = 'padding: 5px 300px 5px 50px; background-color: lightgreen; color: green; font-family:sans-serif; font-size: 20px; font-weight: bold; display: block; width: 100%;';
 
 const styleFighters = 'color: darkgoldenrod; font-style: italic; font-family:sans-serif; font-size: 14px;';
 
-const styleWeapons = 'color: darkorange; font-style: italic; font-family:sans-serif; font-size: 14px;';
+const styleWeapons = 'color: darkorange; font-style: italic; font-family:sans-serif; font-size: 12px;';
 
 const stylePowers = 'color: darkseagreen; font-family:sans-serif; font-size: 12px;';
 
 const styleEfforts = 'color: darkorchid; font-family:sans-serif; font-size: 12px;';
 
-const styleFightersQualified = 'color: darkgreen; font-family:sans-serif; font-size: 14px;';
+const styleQualified = 'color: green; font-family:sans-serif; font-size: 12px; font-weight: bold;';
+
+const styleDisqualified = 'color: red; font-family:sans-serif; font-size: 12px; font-weight: bold;';
 
 const styleFightersDisqualified = 'color: darkred; text-decoration: line-through; font-family:sans-serif; font-size: 14px;';
 
-const styleRounds = 'background-color: lightgray; color: darkcyan; font-family:sans-serif; font-size: 16px; font-weight: bold;';
+const styleTurns = 'padding: 5px 20px; color: cyan; background-color: darkcyan; font-family:sans-serif; font-size: 16px; font-weight: bold;';
 
-
+const styleCombats = 'color: darkcyan; font-family:sans-serif; font-size: 16px; font-weight: bold;';
 
