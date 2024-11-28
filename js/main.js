@@ -9,27 +9,27 @@ console.log('///// Main /////');
 function executeBoolkaichiTournament(fighters, weapons) {
 
    // Phase 1: Weapon Selection
-   console.log('%cPhase 1: Weapon Selection', 'color: green; font-family:sans-serif; font-size: 20px');
+   console.log('%cPhase 1: Weapon Selection', styleTitles);
 
    let fightersWithWeapons = chooseWeapons(fighters, [...weapons]);
 
    // Phase 2: Training
-   console.log('%cPhase 2: Training', 'color: green; font-family:sans-serif; font-size: 20px');
+   console.log('%cPhase 2: Training', styleTitles);
 
    let trainedFighters = training(fightersWithWeapons);
 
    // Phase 3: Qualification
-   console.log('%cPhase 3: Qualification', 'color: green; font-family:sans-serif; font-size: 20px');
+   console.log('%cPhase 3: Qualification', styleTitles);
 
    let qualifiedFighters = qualification(trainedFighters);
 
    // Phase 4: Combat
-   console.log('%cPhase 4: Combat', 'color: green; font-family:sans-serif; font-size: 20px');
+   console.log('%cPhase 4: Combat', styleTitles);
 
    let combatWinners = combat(qualifiedFighters);
 
    // Phase 5: Awards
-   console.log('%cPhase 5: Awards', 'color: green; font-family:sans-serif; font-size: 20px');
+   console.log('%cPhase 5: Awards', styleTitles);
 
    let podiumWinners = awardCeremony(combatWinners);
 
