@@ -149,20 +149,20 @@ function chooseWeapons(fighters, weapons) {
 };
 
 /**
- * Description: function multiplies every totalPower value in the given array [fightersWithWeapons] by a random index between 1 and 100, simulating a training effect.
- * @param {array} fightersWithWeapons - An array of fighters objects
- * @returns {array} - A new array containing the updated fighters after training
+ * Description: function simulates training for each fighter, multiplying their totalPower by a random effort index and adding this new power to the fighter object.
+ * @param {array} fightersWithWeapons - An array of fighter objects with their respective weapons.
+ * @returns {array} - A new array containing updated fighters with their trained power values.
  */
 function training(fightersWithWeapons) {
 
    // console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
 
-   // Use map method to iterate over each fighter in the input array.
+   // Use map method to iterate over each fighter in the input array
    let trainedFighters = fightersWithWeapons.map(fighter => {
 
       // console.log("fighter", typeof fighter, fighter);
 
-      // Pick a random index for the training
+      // Generate a random index representing the effort put in during training
       const randomIndex = getRandomIndex(1, 100);
 
       // Check if the random index is valid (not NaN)
@@ -172,9 +172,10 @@ function training(fightersWithWeapons) {
 
       };
 
+      // Log the effort and new power after training.
       console.log(`%c${fighter.name} %c(power: %c${fighter.totalPower}%c) put %c${randomIndex}% %cof effort in training, increasing its power to: %c${fighter.totalPower * randomIndex}`, styleFighters, styleDefault, stylePowers, styleDefault, styleEfforts, styleDefault, stylePowers);
 
-      // Add a new property trainedPower to fighter.
+      // Add a new trainedPower property based on the totalPower modified by randomIndex
       fighter.trainedPower = fighter.totalPower * randomIndex;
 
       // Return the updated Object [fighter]
@@ -184,20 +185,21 @@ function training(fightersWithWeapons) {
 
    // console.log("trainedFighters", typeof trainedFighters, trainedFighters);
 
+   // Return the new array of trained fighters
    return trainedFighters;
 
 };
 
 /**
- * Description: function delete from given array [trainedFighters] elements which trainedPower is less than 2000 and add robot fighter if qualified fighters number is odd.
- * @param {array} trainedFighters - An array of fighters objects
- * @returns {array} - A new array containing the updated fighters after training
+ * Description: function filter out from given array [trainedFighters] elements which trainedPower is less than 2000.
+ * @param {array} trainedFighters - The array of trained fighters to be filtered.
+ * @returns {array} - A new array containing only the qualified fighters.
  */
 function qualification(trainedFighters) {
 
    // console.log("trainedFighters", typeof trainedFighters, trainedFighters);
 
-   // Use map method to iterate over each fighter in the input array.
+   // Use filter to create an array of fighters that have qualified based on the trained power.
    let qualifiedFighters = trainedFighters.filter(fighter => {
 
       // console.log("fighter", typeof fighter, fighter);
@@ -205,12 +207,15 @@ function qualification(trainedFighters) {
       // Return the updated Object [fighter]
       if (fighter.trainedPower > 2000) {
 
+         // Log that the fighter is qualified.
          console.log(`%c${fighter.name}%c reached a power of %c${fighter.trainedPower}%c which %cis enough to be qualified%c for combat phase!`, styleFighters, styleDefault, stylePowers, styleDefault, styleQualified, styleDefault);
 
+         // Keep the qualified fighter in the array.
          return fighter;
 
       } else {
 
+         // Log that the fighter did not qualify.
          console.log(`%c${fighter.name}%c reached a power of %c${fighter.trainedPower}%c which %cis NOT enough to be qualified%c for combat phase!`, styleFightersDisqualified, styleDefault, stylePowers, styleDefault, styleDisqualified, styleDefault);
 
       };
@@ -219,6 +224,7 @@ function qualification(trainedFighters) {
 
    // console.log("qualifiedFighters", typeof qualifiedFighters, qualifiedFighters);
 
+   // Return the filtered array of qualified fighters.
    return qualifiedFighters;
 
 };
