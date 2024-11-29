@@ -1,26 +1,27 @@
 /**
- * Description: function calls the given function [functionToCall] only after time param [delay].
- * @param {function} functionToCall
- * @param {number} delay
- * @returns {function} 
+ * Description: function to delay the execution of a provided function [functionToCall] by a specified amount of time [delay].
+ * @param {function} functionToCall - The function to be called.
+ * @param {number} delay - The delay in milliseconds before the function is executed.
+ * @returns {function} - A debounced version of the input function.
  */
 function debounce(functionToCall, delay) {
 
-   // Define variable for timeout
+   // Define a variable to hold the timeout reference.
    let timeout;
 
+   // Return a new function that takes any number of arguments.
    return function (...args) { // capture arguments passed to the debounced function
 
-      // Clear the previous timer
+      // Clear any previously set timeout to reset the delay.
       clearTimeout(timeout);
 
-      // Capture context of function
+      // Capture the context (this value) of the original function.
       const context = this;
 
-      // Set a new timeout to call the function
+      // Set a new timeout that will call the original function after the specified delay.
       timeout = setTimeout(() => {
 
-         // Execute the function with the correct context and arguments
+         // Call the function with the correct context and arguments.
          functionToCall.apply(context, args);
 
       }, delay);
@@ -36,7 +37,7 @@ function debounce(functionToCall, delay) {
  */
 function shuffleArray(givenArray) {
 
-   // Loop through the array starting from the last index down to the second element
+   // Iterate from the last element of the array to the second element.
    // (i > 0 ensures we always have at least two elements to swap)
    for (let i = givenArray.length - 1; i > 0; i--) {
 
@@ -50,29 +51,27 @@ function shuffleArray(givenArray) {
 
    };
 
-   // Return the shuffled array to the caller
+   // Return the shuffled array
    return givenArray;
 
 };
 
 /**
- * Description: function generates a random index between two given values (inclusive).
- *
- * @param {number} min - The lower limit (inclusive) for generating the random index.
- * @param {number} max - The upper limit (inclusive) for generating the random index.
- * @returns {number} A random integer index between min and max (both inclusive).
+ * Description: function to generate a random integer index between the specified minimum [min] and maximum [max] values (inclusive).
+ * @param {number} min - Minimum value for the random index.
+ * @param {number} max - Maximum value for the random index.
+ * @returns {number} - A randomly generated integer within the specified range.
  */
 function getRandomIndex(min, max) {
 
-   // Validate that min is less than or equal to max.
+   // Ensure min is less than or equal to max to prevent invalid ranges.
    if (min > max) {
 
       return NaN; // Return NaN if the inputs are invalid.
 
    };
 
-   // Generate a random number between 0 (inclusive) and 1 (exclusive), scale it to the desired range,
-   // and use Math.floor to convert it to an integer within the range of [min, max].
+   // Generate a random integer between min and max using Math.random() and Math.floor().
    const result = Math.floor(Math.random() * (max - min + 1)) + min;
 
    // Return the generated random index.
@@ -82,27 +81,27 @@ function getRandomIndex(min, max) {
 
 /**
  * Description: function randomly assign a unique weapon from given array [weapons] to each fighter in given array [fighter] and return a new result array [fightersWithWeapons]
- * @param {array} fighters
- * @param {array} weapons
- * @returns {array}
+ * @param {array} fighters - The array of fighters to be assigned weapons.
+ * @param {array} weapons - The array of available weapons.
+ * @returns {array} - An array of fighter objects with their assigned weapons and total power.
  */
 function chooseWeapons(fighters, weapons) {
 
-   // Shuffle the fighters array
+   // Shuffle the fighters array to ensure random selection
    const shuffledFighters = shuffleArray(fighters);
 
    // console.log("shuffledFighters", typeof shuffledFighters, shuffledFighters);
 
-   // Create a copy of the weapons array to avoid modifying the original
+   // Create a copy of the weapons array to manipulate without altering the original
    const availableWeapons = [...weapons];
 
-   // Initialize an array to store fighters with weapons
+   // Initialize an array to hold fighters that will be assigned weapons.
    const fightersWithWeapons = [];
 
    // Iterate over each fighter to assign a weapon
    shuffledFighters.forEach((fighter) => {
 
-      // Create a new object to hold the fighter's details
+      // Create a new object to hold fighter details to avoid mutating the original object
       let fighterWithWeapon = { ...fighter };
 
       // console.log("fighterWithWeapon", typeof fighterWithWeapon, fighterWithWeapon);
@@ -113,36 +112,38 @@ function chooseWeapons(fighters, weapons) {
          // Pick a random index for the weapon
          const randomIndex = getRandomIndex(0, availableWeapons.length - 1);
 
-         // Get the random weapon 
+         // Get that weapon using the random index.
          const selectedWeapon = availableWeapons[randomIndex];;
 
-         // Assign the weapon to the fighter
+         // Assign the selected weapon to the fighter
          fighterWithWeapon.weapon = selectedWeapon;
 
-         // Calculate the total power
+         // Calculate total power by adding the fighter's power and weapon's power.
          fighterWithWeapon.totalPower = fighter.power + selectedWeapon.power;
 
-         // Remove the selected weapon from the available weapons
+         // Remove the used weapon from the available array.
          availableWeapons.splice(randomIndex, 1);
 
       } else {
 
-         // If no weapons are available, we can handle it accordingly
+         // If there are no available weapons left, mark the fighter with no weapon.
          fighterWithWeapon.weapon = null;
 
-         // Only fighter's power
+         // Total power remains the same.
          fighterWithWeapon.totalPower = fighter.power;
       };
 
-      // Push the new fighter object with weapon to the fightersWithWeapons array
+      // Add the new fighter object with weapon to the result array [fightersWithWeapons]
       fightersWithWeapons.push(fighterWithWeapon);
 
+      // Log the details of chosen weapon and calculated total power to the console.
       console.log(`%c${fighterWithWeapon.name} %c(power: %c${fighterWithWeapon.power}%c) chose %c${fighterWithWeapon.weapon.name} %c(power: %c${fighterWithWeapon.weapon.power}%c) increasing its power to: %c${fighterWithWeapon.totalPower}`, styleFighters, styleDefault, stylePowers, styleDefault, styleWeapons, styleDefault, stylePowers, styleDefault,stylePowers);
 
    });
 
    // console.log("fightersWithWeapons", typeof fightersWithWeapons, fightersWithWeapons);
 
+   // Return the array of fighters with their assigned weapons.
    return fightersWithWeapons;
 
 };
