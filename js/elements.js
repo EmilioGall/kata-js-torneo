@@ -1,6 +1,6 @@
 console.log('///// Elements /////');
 
-// Define constant of fighters array [fighters]
+// Define an array of fighter objects, each containing a name and power level.
 const fighters = [
    {
       name: 'Freezer',
@@ -55,7 +55,7 @@ const fighters = [
 console.log("fighters", typeof fighters, fighters);
 
 
-// Define constant of weapons array [weapons]
+// Define an array of weapon objects, each with a name and power level.
 const weapons = [
    {
       name: "Ventaglio della Musa",
@@ -110,12 +110,13 @@ const weapons = [
 console.log("weapons", typeof weapons, weapons);
 
 
-// Define constant of Fight Button
+// Define a constant for the Fight button element in the HTML.
 const fightButtonElem = document.querySelector(".btn");
 
 console.log("fightButtonElem", typeof fightButtonElem, fightButtonElem);
 
-///// Define Styles fo Console Logs
+
+///// Define styles for various console log outputs with different colors and formats.
 
 const styleDefault = 'color: white; font-family:sans-serif; font-size: 12px;';
 
