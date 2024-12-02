@@ -145,3 +145,5 @@ weapons.forEach(weapon => {
 const fightButtonElem = document.querySelector(".btn");
 
 // console.log("fightButtonElem", typeof fightButtonElem, fightButtonElem);
+
+console.log('');
